@@ -1,11 +1,120 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700,900' rel='stylesheet'>
     <meta charset="UTF-8">
     <title>Ontime.az - çatdırılma xidməti</title>
+    <style>
+
+        body {
+            background-image: url("hp-map-bg-2.jpg");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+        * {
+            font-family: Montserrat, serif;
+        }
+
+        .wrap-days {
+            margin: 10px;
+        }
+
+        .wrap-days span {
+            font-size: 45px;
+        }
+
+
+        .timer {
+            margin-top: 100px;
+        }
+
+    </style>
 </head>
-<body >
-<h1>Ontime.az tezliklə</h1>
+
+<body>
+<div class="wrap" style="text-align: center">
+    <div class="timer" style="display: flex; justify-content: center ;">
+        <span class="wrap-days">
+            <span id="days">12</span>
+            <p>
+                           days
+
+            </p>
+        </span>
+        <span class="wrap-days">
+            <span id="hours">12</span><br>
+                        <p>
+                           hours
+
+            </p>
+        </span>
+        <span class="wrap-days">
+            <span id="minutes">12</span><br>
+                        <p>
+                           minutes
+
+            </p>
+        </span>
+        <span class="wrap-days">
+            <span id="seconds">12</span><br>
+                        <p>
+                           seconds
+
+            </p>
+        </span>
+    </div>
+    <div class="img">
+        <img src="logo.png"/>
+    </div>
+    <h1>We are cooming soon</h1>
+
+</div>
+
+<script>
+    let till = new Date('2020-07-01 00:00:00'),
+        today = new Date();
+    let daysD = document.getElementById('days');
+    let hoursD = document.getElementById('hours');
+    let minutesD = document.getElementById('minutes');
+    let secondsD = document.getElementById('seconds');
+    let difference = till.getTime() - today.getTime();
+    if (difference > 0) {
+        days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        secondsD.innerHTML = seconds.toString().padStart(2, '0');
+        minutesD.innerHTML = minutes.toString().padStart(2, '0');
+        hoursD.innerHTML = hours.toString().padStart(2, '0');
+        daysD.innerHTML = days.toString().padStart(2, '0');
+        let timer = setInterval(func, 1000)
+    }
+
+    function func() {
+        seconds--;
+        secondsD.innerHTML = seconds.toString().padStart(2, '0');
+        if (seconds <= 0) {
+            seconds = 60;
+            secondsD.innerHTML = seconds.toString().padStart(2, '0');
+            minutes--;
+            minutesD.innerHTML = minutes.toString().padStart(2, '0');
+            if (minutes <= 0) {
+                minutes = 60;
+                minutesD.innerHTML = minutes.toString().padStart(2, '0');
+                hours--;
+                hoursD.innerHTML = hours.toString().padStart(2, '0');
+                if (hours <= 0) {
+                    hours = 24;
+                    hoursD.innerHTML = hours.toString().padStart(2, '0');
+                    if (days <= 0)
+                        days--;
+                    daysD.innerHTML = days.toString().padStart(2, '0');
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
 
